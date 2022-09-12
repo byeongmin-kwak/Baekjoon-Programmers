@@ -3,7 +3,7 @@
 using namespace std;
 
 
-void recursion(string s, int start, int end, int cnt) {
+void recursion(string& s, int start, int end, int cnt) {
 	if (start >= end) {
 		cnt += 1;
 		cout << 1 << ' ' << cnt << '\n';
@@ -18,13 +18,13 @@ void recursion(string s, int start, int end, int cnt) {
 	} 
 }
 
-void isPalindrome(string s) {
+void isPalindrome(string& s) {
 	return recursion(s, 0, s.size()-1, 0);
 }
 
 int main() {
 
-	//ios_base::sync_with_stdio(0);
+	ios_base::sync_with_stdio(0);
     cin.tie(0);
 	cout.tie(0);
 	
