@@ -1,0 +1,52 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int N, M;
+int* arr = new int[N];
+int* temp = new int[N];
+bool* visited = new bool[N];
+
+void dfs(int depth, int index) {
+    if (depth == M) {
+        for (int i = 0; i < M; i++) {
+            cout << temp[i] << ' ';
+        }
+        cout << '\n';
+        
+        return;
+    }
+
+    
+    int check = -1;
+    for (int i = index; i < N; i++) {
+        if (visited[i]) {
+            continue;
+        }
+        if (check == arr[i]) {
+            continue;
+        }
+        check = arr[i];
+        visited[i] = true;
+        temp[depth] = arr[i];
+        dfs(depth+1, i);
+        visited[i] = false;
+    }
+}
+
+
+int main() {
+    
+    cin >> N >> M;
+    
+    for (int i = 0; i < N; i++) {
+        cin >> arr[i];
+    }
+    
+    sort(arr, arr+N);
+    
+    dfs(0, 0);
+    
+    
+}
+
