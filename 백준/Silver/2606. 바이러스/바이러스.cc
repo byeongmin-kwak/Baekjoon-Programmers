@@ -4,24 +4,17 @@ using namespace std;
  
 vector<int> arr[101];
 vector<bool> visited(101);
-queue<int> que;
-int cnt = 0;
+int cnt = -1;
 
-void bfs(int start) {
+void dfs(int start) {
     visited[start] = true;
-    que.push(start);
+    cnt++;
     
-    while(!que.empty()) {
-        int n = que.front();
-        que.pop();
+    for (auto& edge : arr[start]) {
+        if (visited[edge])
+            continue;
+        dfs(edge);
         
-        for (auto& edge : arr[n]) {
-            if (visited[edge])
-                continue;
-            que.push(edge);
-            visited[edge] = true;
-            cnt++;
-        }
     }
     
 }
@@ -42,7 +35,7 @@ int main() {
         arr[v].push_back(u);
     }
     
-    bfs(1);
+    dfs(1);
     
     cout << cnt << endl;
     
