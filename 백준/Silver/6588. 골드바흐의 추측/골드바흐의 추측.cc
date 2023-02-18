@@ -1,34 +1,49 @@
-    #include <bits/stdc++.h>
+#include <bits/stdc++.h>
 
-    using namespace std;
+using namespace std;
 
+bool arr[1000001];
 
-bool prime_num_discriminator(int input) {
-    for (int i = 2; i <= sqrt(input); i++) {
-        if (input%i == 0)return false;
+void SET() {
+    arr[0] = true;
+    arr[1] = true;
+    
+    for (int i = 2; i * i < 1000001; i++) {
+        if (arr[i] == true)
+            continue;
+        for (int j = i * i; j < 1000001; j+=i) {
+            arr[j] = true;
+        }
     }
-    return true;
 }
 
-int main(void) {
+int main() {
     cin.tie(NULL);
     cout.tie(NULL);
     ios_base :: sync_with_stdio(false);
-    int input = 1;
-    int a, b;
-    bool suc = false;
     
-    while (input) {
-        cin >> input;
-        for (int i = 1; i < input / 2; i++) {
-            a = 2 * i + 1; //홀수
-            b = input - a;
-            if (prime_num_discriminator(a) and prime_num_discriminator(b)) {
-                cout << input << " = " << a << " + " << b << "\n";
-                suc = true;
+    int n;
+    bool check = false;
+    SET();
+    
+    while (true) {
+        cin >> n;
+        if (n == 0) {
+            break;
+        }
+        check = false;
+
+        for (int i = 3; i < n; i+=2) {
+            if (!arr[i] && !arr[n-i]) {
+                cout << n << " = " << i << " + " << n-i << '\n';
+                check = true;
                 break;
             }
         }
-        if (!suc) cout << "Goldbach's conjecture is wrong\n";
+        if (!check) {
+            cout << "Goldbach's conjecture is wrong." << '\n';
+        }
     }
+    
+    return 0;
 }
