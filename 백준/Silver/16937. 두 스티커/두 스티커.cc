@@ -13,10 +13,9 @@ void check() {
     if (stk[0].second + stk[1].second <= W && max(stk[0].first,stk[1].first) <= H) {
         ans = max(ans, stk[0].first*stk[0].second + stk[1].first*stk[1].second);
     }
-    if (stk[0].second + stk[1].second <= H && max(stk[0].first,stk[1].first) <= W) {
+    if (stk[0].first + stk[1].first <= H && max(stk[0].second,stk[1].second) <= W) {
         ans = max(ans, stk[0].first*stk[0].second + stk[1].first*stk[1].second);
     }
-
 }
 
 void solve(int idx, int size, int cnt) {
