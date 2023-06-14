@@ -3,21 +3,57 @@
 
 using namespace std;
 
+vector<int> v1;
+
 int solution(vector<int> v) {
-    string s;
+    
     int cnt = 0;
-    int len = 0;
     
     for (int i = 0; i < v.size(); i++) {
-        s += to_string(v[i]);
+        v1.push_back(v[i]);
         
-        if (s.size() >= 4) {
-            if (s.substr(s.size()-4, 4) == "1231") {
-                cnt++;
-                s.erase(s.size()-4, 4);
+        if (v1.size() >= 4) {
+            int check = 0;
+            
+            for (int i = 0; i < 4; i++) {
+                if (check == 0) {
+                    if (v1[v1.size()-4+i] != 1) {
+                        break;
+                    }
+                    else {
+                        check++;
+                    }
+                }
+                else if (check == 1) {
+                    if (v1[v1.size()-4+i] != 2) {
+                        break;
+                    }
+                    else {
+                        check++;
+                    }
+                }
+                else if (check == 2) {
+                    if (v1[v1.size()-4+i] != 3)
+                        break;
+                    else {
+                        check++;
+                    }
+                }
+                else if (check == 3) {
+                    if (v1[v1.size()-4+i] != 1) {
+                        break;
+                    }
+                    else {
+                        cnt++;
+                        for (int i = 0; i < 4; i++) {
+                            v1.pop_back();
+                        }
+                    }
+                }
             }
         }
     }
+
     int answer = cnt;
     return answer;
 }
