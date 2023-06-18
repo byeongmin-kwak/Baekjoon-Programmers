@@ -1,31 +1,34 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <iostream>
 
 using namespace std;
+
+map<int,string> m1;
+map<string, int> m2;
 
 vector<string> solution(vector<string> players, vector<string> callings) {
     vector<string> answer;
     
-    map<int, string> m1;
-    map<string, int> m2;
-    
     for (int i = 0; i < players.size(); i++) {
-        m1[i] = players[i];
-        m2[players[i]] = i;
+        m1[i+1] = players[i];
+        m2[players[i]] = i+1;
     }
     
     for (int i = 0; i < callings.size(); i++) {
-        int index = m2[callings[i]];
-        string change = m1[index-1];
-        m1[index-1] = callings[i];
-        m1[index] = change;
-        m2[callings[i]] -= 1;
-        m2[change] += 1;
+        int idx = m2[callings[i]];
+        string name = m1[idx-1];
+        
+        m1[idx-1] = callings[i];
+        m1[idx] = name;
+        m2[callings[i]] = idx - 1;
+        m2[name] = idx;
+        
     }
     
-    for (auto elem : m1) {
-        answer.push_back(elem.second);
+    for (int i = 1; i <= players.size(); i++) {
+        answer.push_back(m1[i]);
     }
     
     return answer;
