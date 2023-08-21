@@ -4,41 +4,29 @@
 
 using namespace std;
 
-int arr[9];
-bool visited[9];
 vector<int> v;
 
-void solve(int depth, int sum) {
-    if (depth == 7) {
-        if (sum == 100) {
-            sort(v.begin(), v.end());
-            for (int i = 0; i < 7; i++) {
-                cout << v[i] << endl;
-            }
-            exit(0);
-        }
-        return;
-    }
-    
-    for (int i = 0; i < 9; i++) {
-        if (!visited[i]) {
-            sum += arr[i];
-            v.push_back(arr[i]);
-            visited[i] = true;
-            solve(depth+1, sum);
-            visited[i] = false;
-            sum -= arr[i];
-            v.pop_back();
-        }
-    }
-}
-
 int main() {
-    
+    int sum = 0;
+    int num;
     for (int i = 0; i < 9; i++) {
-        cin >> arr[i];
+        cin >> num;
+        v.push_back(num);
+        sum += num;
     }
     
-    solve(0, 0);
+    sort(v.begin(),v.end());
     
+    for (int i = 0; i < 8; i++) {
+        for (int j = i+1; j < 9; j++) {
+            if (sum - (v[i]+v[j]) == 100) {
+                for (int k = 0; k < 9; k++) {
+                    if (k != i && k != j) {
+                        cout << v[k] << ' ';
+                    }
+                }
+                return 0;
+            }
+        }
+    }
 }
