@@ -1,66 +1,64 @@
-#include <bits/stdc++.h>
-#define MAX 1001
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <algorithm>
 
 using namespace std;
 
+vector<vector<int>> graph(1001);
+vector<bool> visited(1001);
 int N, M, V;
-int MAP[MAX][MAX];
-bool visited[MAX];
-queue<int> q;
 
-void reset() {
-    for (int i = 1; i <= N; i++) {
-        visited[i] = 0;
+void DFS(int start) {
+  cout << start << ' ';
+  for (int elem : graph[start]) {
+    if (!visited[elem]) {
+      visited[elem] = true;
+      DFS(elem);
     }
+  }
 }
- 
-void DFS(int v) {
-    visited[v] = true;
-    cout << v << " ";
-        
-    for (int i = 1; i <= N; i++) {
-        if (MAP[v][i] == 1 && visited[i] == 0) {
-            DFS(i);
-        }
+
+void BFS(int start) {
+  queue<int> que;
+  que.push(start);
+  visited[start] = true;
+  
+  while(!que.empty()) {
+    int tmp = que.front();
+    que.pop();
+    cout << tmp << ' ';
+    
+    for (int elem : graph[tmp]) {
+      if (!visited[elem]) {
+        que.push(elem);
+        visited[elem] = true;
+      }
     }
+  }
 }
- 
-void BFS(int v) {
-    q.push(v);
-    visited[v] = true;
-    cout << v << " ";
- 
-    while (!q.empty()) {
-        v = q.front();
-        q.pop();
-        
-        for (int w = 1; w <= N; w++) {
-            if (MAP[v][w] == 1 && visited[w] == 0) {
-                q.push(w);
-                visited[w] = true;
-                cout << w << " ";
-            }
-        }
-    }
-}
- 
+
+
 int main() {
-    cin >> N >> M >> V;
- 
-    for (int i = 0; i < M; i++) {
-        int a, b;
-        cin >> a >> b;
-        MAP[a][b] = 1;
-        MAP[b][a] = 1;
-    }
- 
-    reset();
-    DFS(V);
-    
-    cout << '\n';
-    
-    reset();
-    BFS(V);
- 
-    return 0;
+  cin >> N >> M >> V;
+  
+  int a, b;
+  for (int i = 0; i < M; i++) {
+    cin >> a >> b;
+    graph[a].push_back(b);
+    graph[b].push_back(a);
+  }
+  
+  for (int i = 1; i <= N; i++) {
+    sort(graph[i].begin(), graph[i].end());
+  }
+  
+  visited[V] = true;
+  DFS(V);
+  cout << endl;
+  
+  for (int i = 1; i <= N; i++) {
+    visited[i] = false;
+  }
+  BFS(V);
 }
