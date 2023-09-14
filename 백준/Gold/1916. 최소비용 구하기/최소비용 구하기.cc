@@ -31,7 +31,7 @@ int main() {
   
   while(!pq.empty()) {
     cost = -pq.top().first;
-    long long current = pq.top().second;
+    int current = pq.top().second;
     pq.pop();
     
     if (dist[current] < cost) continue;
