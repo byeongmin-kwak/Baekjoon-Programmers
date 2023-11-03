@@ -10,20 +10,16 @@ int solution(vector<int> topping) {
     
     map<int, int> a;
     map<int, int> b;
-    int cntA = 0, cntB = 0;
     
     for (int elem : topping) {
-        a[elem]++;
-        if (a[elem] == 1) cntA++;
+        a[elem]++;       
     }
     
-    for (int elem : topping) {
-        a[elem]--;
-        b[elem]++;
-        if (a[elem] == 0) cntA--;
-        if (b[elem] == 1) cntB++;
-        if (cntA == cntB) answer++;
+    for (int i = 1; i <= 4; i++) {
+        cout << a[i] << ' ';
     }
+    
+    
     
     return answer;
 }
