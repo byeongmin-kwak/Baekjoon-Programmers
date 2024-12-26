@@ -16,7 +16,7 @@ void input() {
   }
 }
 
-void solve(vector<int> v, int sum) {
+void solve(vector<int>& v, int sum) {
   if (v.size() == 2) {
     ans = max(sum, ans);
     return;
