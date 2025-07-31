@@ -1,41 +1,43 @@
 function solution(dartResult) {
-  let darts = dartResult.split(""); // 배열로 변환
-  let scores = []; // 각 기회마다 얻은 점수 배열
-  let score = 0; // 각 기회마다 얻은 점수
-
-  for (let i = 0; i < darts.length; i++) {
-    // 숫자 구하기
-    if (!isNaN(darts[i])) {
-      // 10인 경우
-      if (darts[i] === "1" && darts[i + 1] === "0") {
-        score = 10;
-        i++; // 다음에 오는 0은 건너 뛰어야 함
-      } else score = darts[i];
+    var answer = 0;
+    let point = 0;
+    let points = [];
+    
+    for (let i = 0; i < dartResult.length; i++) {
+        let current = dartResult[i];
+        
+        if (current >= '0' && current <= '9') {
+            if (current == '1' && dartResult[i+1] == '0') {
+                point = 10;
+                i++;
+            }
+            else {
+                point = current;
+            }
+        }
+        
+        else if (current == 'S') {
+            points.push(Math.pow(point, 1));
+        }
+        else if (current == 'D') {
+            points.push(Math.pow(point, 2));
+        }
+        else if (current == 'T') {
+            points.push(Math.pow(point, 3));
+        }
+        
+        else if (current == '#') {
+            points[points.length-1] *= -1;
+        }
+        else if (current == '*') {
+            points[points.length-1] *= 2;
+            points[points.length-2] *= 2;
+        }
     }
-
-    // 점수 구하기
-    else if (darts[i] === "S") {
-      scores.push(Math.pow(score, 1));
-    } else if (darts[i] === "D") {
-      scores.push(Math.pow(score, 2));
-    } else if (darts[i] === "T") {
-      scores.push(Math.pow(score, 3));
+    
+    for (let i = 0; i < points.length; i++) {
+        answer += points[i];
     }
-
-    // 옵션 적용하기
-    else if (darts[i] === "#") {
-      scores[scores.length - 1] *= -1;
-    } else if (darts[i] === "*") {
-      scores[scores.length - 2] *= 2;
-      scores[scores.length - 1] *= 2;
-    }
-  }
-
-  // 점수 합계 구하기
-  let sum = 0;
-  for (let i = 0; i < scores.length; i++) {
-    sum += scores[i];
-  }
-
-  return sum;
+    
+    return answer;
 }
