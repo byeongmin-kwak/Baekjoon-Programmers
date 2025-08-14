@@ -17,17 +17,16 @@ function solution(points, routes) {
     }
     
     while (true) {
-        // 현재 위치에서 충돌이 있는지 체크
-// 현재 위치에서 충돌 체크
-let seen = new Map();
-for (let i = 0; i < current.length; i++) {
-    if (flag[i][flag[i].length - 1]) continue; // 도착한 로봇 무시
-    let key = current[i][0] + ',' + current[i][1];
-    seen.set(key, (seen.get(key) || 0) + 1);
-}
-for (let [key, count] of seen) {
-    if (count >= 2) answer++; // 같은 좌표에 2대 이상이면 1번만 증가
-}
+        // 현재 위치에서 충돌 체크
+        let seen = new Map();
+        for (let i = 0; i < current.length; i++) {
+            if (flag[i][flag[i].length - 1]) continue; // 도착한 로봇 무시
+            let key = current[i][0] + ',' + current[i][1];
+            seen.set(key, (seen.get(key) || 0) + 1);
+        }
+        for (let [key, count] of seen) {
+            if (count >= 2) answer++; // 같은 좌표에 2대 이상이면 1번만 증가
+        }
 
         
         // 다 이동했는지 체크
