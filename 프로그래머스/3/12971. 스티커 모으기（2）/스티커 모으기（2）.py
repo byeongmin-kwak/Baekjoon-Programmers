@@ -8,7 +8,7 @@ def solution(sticker):
 
     dp1 = [0] * n
     dp1[0] = sticker[0]
-    dp1[1] = max(sticker[0], sticker[1])
+    dp1[1] = sticker[0]
     for i in range(2, n-1):
         dp1[i] = max(dp1[i-1], dp1[i-2] + sticker[i])
         
