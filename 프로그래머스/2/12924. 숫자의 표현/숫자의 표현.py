@@ -1,21 +1,17 @@
-from collections import deque
-
 def solution(n):
     answer = 1
-    que = deque()
-    total = 0
+    left, right = 1, 1
+    total = 1
     
-    if n < 3:
-        return 1
-    
-    for i in range(1, n//2 + 2):
-        total += i
-        que.append(i)
-        
-        while total > n:
-            total -= que.popleft()
-        
+    while left <= n // 2:
         if total == n:
             answer += 1
+        
+        if total >= n:
+            total -= left
+            left += 1
+        else:
+            right += 1
+            total += right
     
     return answer
