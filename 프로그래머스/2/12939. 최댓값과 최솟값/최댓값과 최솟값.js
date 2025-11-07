@@ -1,14 +1,12 @@
 function solution(s) {
     let answer = '';
     
-    let arr = s.split(' ');
+    arr = s.split(' ');
     
-    let maxValue = Math.max(...arr);
-    let minValue = Math.min(...arr);
+    minValue = Math.min(...arr);
+    maxValue = Math.max(...arr);
     
-    answer += minValue;
-    answer += ' ';
-    answer += maxValue;
+    answer = minValue + ' ' + maxValue;
     
     return answer;
 }
