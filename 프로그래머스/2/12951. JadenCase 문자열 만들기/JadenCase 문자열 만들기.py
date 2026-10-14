@@ -1,12 +1,13 @@
 def solution(s):
     answer = ''
     
-    s = s.lower()
-    
-    for i in range(len(s)):
-        if i == 0 or s[i-1] == ' ':
-            answer += s[i].upper()
-        else:
-            answer += s[i].lower()
+    s_list = list(s.lower())
+    s_list[0] = s_list[0].upper()
         
+    for i in range(1, len(s_list)):
+        if s_list[i-1] == ' ':
+            s_list[i] = s_list[i].upper()
+    
+    answer = ''.join(s_list)
+    
     return answer
