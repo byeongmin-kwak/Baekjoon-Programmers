@@ -1,12 +1,10 @@
 def solution(A,B):
-    answer = float('inf')
-
-    A.sort()
-    B.sort()
+    answer = 0
     
-    sum = 0
+    A.sort()
+    B.sort(reverse=True)
+    
     for i in range(len(A)):
-        sum += A[i]*B[len(B)-i-1]
-    answer = min(answer, sum)
-
+        answer += A[i] * B[i]
+    
     return answer
