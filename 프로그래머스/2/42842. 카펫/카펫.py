@@ -1,12 +1,19 @@
+def cnt_brown(w, h):
+    return w*2 + (h-2)*2
+
 def solution(brown, yellow):
     answer = []
     
-    for yh in range(1, int(yellow**0.5)+1):
-        if yellow % yh == 0:
-            yw = yellow // yh
-
-            if (brown == (yw+2)*2 + yh*2):
-                answer = [yw+2, yh+2] 
-                break
+    for i in range(1, int(yellow**0.5)+1):
+        if yellow % i != 0:
+            continue
+        
+        h = i + 2
+        w = yellow / i + 2
+        
+        if cnt_brown(w, h) == brown:
+            answer.append(w)
+            answer.append(h)
+            break
 
     return answer
