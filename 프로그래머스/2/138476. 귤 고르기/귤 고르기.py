@@ -3,18 +3,12 @@ from collections import Counter
 def solution(k, tangerine):
     answer = 0
     
-    # 귤 크기별 개수 세기
-    counter = Counter(tangerine)
+    cnt = sorted(Counter(tangerine).values(), reverse=True)
     
-    # 개수 기준으로 내림차순 정렬
-    sorted_counts = sorted(counter.values(), reverse=True)
-    
-    # 많이 나온 귤부터 담기
-    total = 0
-    for cnt in sorted_counts:
-        total += cnt
+    for c in cnt:
         answer += 1
-        if total >= k:
+        k -= c
+        if k <= 0:
             break
     
     return answer
