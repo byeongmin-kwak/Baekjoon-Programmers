@@ -1,13 +1,15 @@
-import math
-
-def lcm(a, b):
-    return a * b // math.gcd(a, b)
+import math    
 
 def solution(arr):
-    answer = arr[0]
+    answer = 0
     
+    if len(arr) == 1:
+        return arr[0]
     
+    tmp = arr[0]
     for i in range(1, len(arr)):
-        answer = lcm(answer, arr[i])
+        tmp = math.lcm(tmp, arr[i])
+    
+    answer = tmp
     
     return answer
