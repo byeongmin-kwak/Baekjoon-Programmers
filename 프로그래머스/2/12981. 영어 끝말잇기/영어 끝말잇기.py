@@ -1,32 +1,18 @@
 def solution(n, words):
-    answer = []
-
-    dict = {}
+    # set 이용 체크
+    # 실패하는 시점에 누가 몇번째인지 구하기
     
-    dict[words[0]] = True
+    s = {words[0]}
+    
     for i in range(1, len(words)):
-        if words[i][0] != words[i-1][-1]:
-            num = (i+1) % n
-            if num == 0:
-                num = n
-                turn = (i+1) // n
-            else:
-                turn = (i+1) // n + 1
-            answer = [num, turn]
-            break
+        cur = words[i]
+        prev = words[i-1]
         
-        if words[i] not in dict:
-            dict[words[i]] = True
-        else:
-            num = (i+1) % n
-            if num == 0:
-                num = n
-                turn = (i+1) // n
-            else:
-                turn = (i+1) // n + 1
-            answer = [num, turn]
-            break
-            
-    if not answer:
-        answer = [0, 0]
-    return answer
+        if cur[0] != prev[-1] or cur in s:
+            person = (i % n) + 1
+            turn = (i // n) + 1
+            return [person, turn]
+        
+        s.add(cur)
+        
+    return [0,0]
