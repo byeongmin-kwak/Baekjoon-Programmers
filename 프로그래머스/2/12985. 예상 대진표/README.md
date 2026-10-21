@@ -1,10 +1,10 @@
 # [level 2] 예상 대진표 - 12985 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12985?language=python3) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12985) 
 
 ### 성능 요약
 
-메모리: 9.04 MB, 시간: 0.01 ms
+메모리: 11.4 MB, 시간: 0.01 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 09월 20일 22:00:33
+2026년 10월 21일 20:57:26
 
 ### 문제 설명
 
