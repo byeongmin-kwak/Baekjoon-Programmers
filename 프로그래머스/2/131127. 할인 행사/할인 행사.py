@@ -1,36 +1,16 @@
-def check(want, number, dict):
-    
-    for i in range(len(want)):
-        if want[i] not in dict or dict[want[i]] < number[i]:
-            return False
-    
-    return True
-    
+from collections import Counter
 
 def solution(want, number, discount):
+    
     answer = 0
     
-    dict = {}
+    target = Counter(dict(zip(want, number)))
     
-    for i in range(10):
-        if discount[i] not in dict:
-            dict[discount[i]] = 1
-        else:
-            dict[discount[i]] += 1
-            
-    if check(want, number, dict):
-        answer += 1
-    
-    for i in range(10, len(discount)):        
-        dict[discount[i-10]] -= 1
-        
-        if discount[i] in dict:
-            dict[discount[i]] += 1
-        else:
-            dict[discount[i]] = 1
-            
-        if check(want, number, dict):
+    # 2. 10일 연속 구간을 슬라이딩하며 비교
+    # discount 길이가 N일 때, 10일 연속 구간의 시작점은 0부터 N - 10까지
+    for i in range(len(discount) - 9):
+        # 10일 간의 할인 품목을 Counter로 만들어 target과 직접 비교
+        if Counter(discount[i:i + 10]) == target:
             answer += 1
-        
-        
+            
     return answer
